@@ -25,12 +25,13 @@ SECRET_KEY = 'mek@rfwufkfcxq+=5-u1*r)y=b)twiuhp^^^meeb43tp*q*$53'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['178.151.78.191', '192.168.1.5']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+	'shopapp.apps.ShopappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,8 +76,10 @@ WSGI_APPLICATION = 'djangoshop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'ShopDB',
+        'USER': 'shopadmin',
+        'PASSWORD': 'shopadmin123456',
     }
 }
 

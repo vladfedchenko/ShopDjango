@@ -23,8 +23,12 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=0
-FILE_NAME_0=767;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fmanage.py;0;4
+current_page=4
+FILE_NAME_0=808;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fmanage.py;0;4
+FILE_NAME_1=868;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fdjangoshop%2Fsettings.py;0;4
+FILE_NAME_2=93;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Fviews.py;0;4
+FILE_NAME_3=93;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Furls.py;0;4
+FILE_NAME_4=764;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fdjangoshop%2Furls.py;0;4
 
 [VTE]
 last_dir=/home/vladfedchenko
@@ -37,5 +41,5 @@ generate_tags=false
 
 [build-menu]
 EX_00_LB=_Execute
-EX_00_CM=python3 manage.py runserver
+EX_00_CM=python3 manage.py runserver 0.0.0.0:8000
 EX_00_WD=%p
