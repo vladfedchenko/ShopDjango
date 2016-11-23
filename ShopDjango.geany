@@ -16,16 +16,18 @@ indent_mode=2
 name=ShopDjango
 base_path=/home/vladfedchenko/Documents/GitHub/ShopDjango/
 description=
-file_patterns=*.py;
+file_patterns=*.py;*.html;
 
 [long line marker]
 long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=1
+current_page=3
 FILE_NAME_0=255;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Fadmin.py;0;4
 FILE_NAME_1=1889;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Fmodels.py;0;4
+FILE_NAME_2=0;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Fviews.py;0;4
+FILE_NAME_3=113;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Furls.py;0;4
 
 [VTE]
 last_dir=/home/vladfedchenko
