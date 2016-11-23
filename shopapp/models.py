@@ -37,4 +37,42 @@ class TV(ShopItem):
 	diagonal = models.FloatField()
 	is_smart = models.BooleanField()
 	
+	@classmethod
+	def create(cls, brand, model, price, diagonal, is_smart):
+		item_type, created = ItemType.objects.get_or_create(name='TV')
+		unique_id = UniqueID(item_type=item_type)
+		unique_id.save()
+		tv = cls(brand=brand, model=model, unique_id=unique_id, price=price, diagonal=diagonal, is_smart=is_smart)
+		tv.save()
+		return tv
+			
+			
+	
+class Monitor(ShopItem):
+	diagonal = models.FloatField()
+	hdmi_num = models.IntegerField()
+	vga_num = models.IntegerField()
+	
+	@classmethod
+	def create(cls, brand, model, price, diagonal, hdmi_num, vga_num):
+		item_type, created = ItemType.objects.get_or_create(name='Monitor')
+		unique_id = UniqueID(item_type=item_type)
+		unique_id.save()
+		item = cls(brand=brand, model=model, unique_id=unique_id, price=price, diagonal=diagonal, hdmi_num=hdmi_num, vga_num=vga_num)
+		item.save()
+		return item
+	
+class Projector(ShopItem):
+	brightness = models.IntegerField()
+	hdmi_num = models.IntegerField()
+	vga_num = models.IntegerField()
+	
+	@classmethod
+	def create(cls, brand, model, price, brightness, hdmi_num, vga_num):
+		item_type, created = ItemType.objects.get_or_create(name='Projector')
+		unique_id = UniqueID(item_type=item_type)
+		unique_id.save()
+		item = cls(brand=brand, model=model, unique_id=unique_id, price=price, brightness=brightness, hdmi_num=hdmi_num, vga_num=vga_num)
+		item.save()
+		return item
 	
