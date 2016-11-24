@@ -1,0 +1,12 @@
+{% load shopapp_tags %}
+<table>
+	{% for r in rows %}
+	<tr>
+		{% for c in cols %}
+		<td>
+			{% get_cell_content objects r c cols|length %}
+		</td>
+		{% endfor %}
+	</tr>
+	{% endfor %}
+</table>

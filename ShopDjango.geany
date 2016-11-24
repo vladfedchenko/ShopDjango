@@ -23,12 +23,14 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=2
+current_page=5
 FILE_NAME_0=255;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Fadmin.py;0;4
 FILE_NAME_1=1889;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Fmodels.py;0;4
-FILE_NAME_2=470;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Fviews.py;0;4
-FILE_NAME_3=74;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Furls.py;0;4
-FILE_NAME_4=126;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Ftemplates%2Fshopapp%2Fcategories.html;0;4
+FILE_NAME_2=236;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Fviews.py;0;4
+FILE_NAME_3=180;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Furls.py;0;4
+FILE_NAME_4=110;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Ftemplates%2Fshopapp%2Fcategories.html;0;4
+FILE_NAME_5=167;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Ftemplates%2Fshopapp%2Fcategory.html;0;4
+FILE_NAME_6=278;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Ftemplatetags%2Fshopapp_tags.py;0;4
 
 [VTE]
 last_dir=/home/vladfedchenko
