@@ -37,6 +37,9 @@ def create_item_cell(obj, cat):
 			   'cat_name' : cat}
 	return template.render(context)
 	
+#def get_login_info(request):
+	
+	
 def item_view(request, category_val, obj_id):
 	return HttpResponse(category_val + ' ' + obj_id)
 	

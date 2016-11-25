@@ -1,7 +1,11 @@
-<ul>
-	{% for cat_key, cat_value in categories.items %}
-		<li>
-			<a href="{% url 'shopapp:category' cat_key 1 %}">{{ cat_value.0 }}</a>
-		</li>
-	{% endfor %}
-</ul>
+<div>
+	<ul>
+		{% for cat_key, cat_value in categories.items %}
+			<li>
+				<a href="{% url 'shopapp:category' cat_key 1 %}">{{ cat_value.0 }}</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
+
+<a href="{% url django.contrib.auth.login %}">Login</a>

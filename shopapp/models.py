@@ -23,7 +23,7 @@ class Brand(models.Model):
 class ShopItem(models.Model):
 	brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
 	model = models.CharField(max_length=200)
-	unique_id = models.ForeignKey(UniqueID, on_delete=models.CASCADE)
+	unique_id = models.OneToOneField(UniqueID, on_delete=models.CASCADE)
 	price = models.FloatField()
 	
 	def __str__(self):
@@ -75,4 +75,3 @@ class Projector(ShopItem):
 		item = cls(brand=brand, model=model, unique_id=unique_id, price=price, brightness=brightness, hdmi_num=hdmi_num, vga_num=vga_num)
 		item.save()
 		return item
-	
