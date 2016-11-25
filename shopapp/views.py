@@ -25,14 +25,20 @@ def category(request, category_val, page):
 	
 	context = {'objects' : obj_list,
 				'rows' : range(rows),
-				'cols' : range(cols)}
+				'cols' : range(cols),
+				'cat_name' : category_val,}
 	
 	#tv = cls.objects.get(id=1)
 	return render(request, 'shopapp/category.html', context)
 	
-def create_item_cell(obj):
+def create_item_cell(obj, cat):
 	template = loader.get_template('shopapp/item_cell.html')
-	context = {'object' : obj}
+	context = {'object' : obj,
+			   'cat_name' : cat}
 	return template.render(context)
+	
+def item_view(request, category_val, obj_id):
+	return HttpResponse(category_val + ' ' + obj_id)
+	
 	
 	

@@ -4,7 +4,7 @@
 	<tr>
 		{% for c in cols %}
 		<td>
-			{% get_cell_content objects r c cols|length %}
+			{% get_cell_content objects r c cols|length cat_name %}
 		</td>
 		{% endfor %}
 	</tr>
