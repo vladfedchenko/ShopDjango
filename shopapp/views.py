@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.template import loader
 from .models import *
 
 categories = {'tv' : ('TVs', TV),
@@ -28,3 +29,10 @@ def category(request, category_val, page):
 	
 	#tv = cls.objects.get(id=1)
 	return render(request, 'shopapp/category.html', context)
+	
+def create_item_cell(obj):
+	template = loader.get_template('shopapp/item_cell.html')
+	context = {'object' : obj}
+	return template.render(context)
+	
+	
