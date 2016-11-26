@@ -35,7 +35,7 @@ def create_item_cell(obj, cat):
 	context = {'object' : obj,
 			   'cat_name' : cat}
 	return template.render(context)
-	
+
 def categories_list():
 	template = loader.get_template('shopapp/categories.html')
 	context = {'categories' : categories}
