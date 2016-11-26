@@ -1,5 +1,9 @@
+{% extends "shopapp/base_generic.html" %}
 {% load shopapp_tags %}
-<table>
+
+{% block content %}
+
+<table class="table table-bordered">
 	{% for r in rows %}
 	<tr>
 		{% for c in cols %}
@@ -10,3 +14,5 @@
 	</tr>
 	{% endfor %}
 </table>
+
+{% endblock %}

@@ -25,7 +25,7 @@ SECRET_KEY = 'mek@rfwufkfcxq+=5-u1*r)y=b)twiuhp^^^meeb43tp*q*$53'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['178.151.78.191', '192.168.1.5', '127.0.0.1', '192.168.1.3']
+ALLOWED_HOSTS = ['178.151.78.191', '192.168.1.5', '127.0.0.1', '192.168.1.3', '192.168.1.2']
 
 
 # Application definition
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'djangoshop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['./templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'djangoshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST' : '192.168.1.5',
+        'HOST' : '192.168.1.2',
         'NAME': 'ShopDB',
         'USER': 'shopadmin',
         'PASSWORD': 'shopadmin123456',
@@ -122,3 +122,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = '/shop/'
