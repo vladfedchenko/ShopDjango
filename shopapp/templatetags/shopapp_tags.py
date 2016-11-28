@@ -1,5 +1,5 @@
 from django import template
-from ..views import create_item_cell, categories_list
+from ..views import *
 
 register = template.Library()
 
@@ -24,3 +24,6 @@ def get_cell_content(*args, **kwargs):
 def create_category_list():
 	return categories_list()
 	
+@register.simple_tag(takes_context=True)
+def get_filter_form(context, cat_name):
+	return get_filter(context, cat_name)

@@ -1,0 +1,28 @@
+<hr>
+<form action="{% url 'shopapp:category' 'projector' '1' %}" method="post">
+	{% csrf_token %}
+	<label for="min_price">Minimal price:</label>
+	<input type="text" id="min_price" name="min_price" value="{{ filter.min_price }}"/>
+	
+	<label for="max_price">Maximal price:</label>
+	<input type="text" id="max_price" name="max_price" value="{{ filter.max_price }}"/>
+	
+	<label for="brand_name">Brand:</label>
+	<input type="text" id="brand_name" name="brand_name" value="{{ filter.brand_name }}"/>
+	
+	<label for="min_brightness">Min brightness:</label>
+	<input type="text" id="min_brightness" name="min_brightness" value="{{ filter.min_brightness }}"/>
+	
+	<br/>
+	<input type="submit" name="action_button" value="Filter" />
+	
+	<br/>
+	{% if can_go_prev %}
+	<input type="submit" name="action_button" value="< Prev" />
+	{% endif %}
+	{% if can_go_next %}
+	<input type="submit" name="action_button" value="Next >" />
+	{% endif %}
+	
+</form>
+<hr>

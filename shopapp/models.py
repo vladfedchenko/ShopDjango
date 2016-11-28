@@ -83,3 +83,14 @@ class UserItem(models.Model):
 	price = models.FloatField()
 	date = models.DateTimeField()
 	region = models.GenericIPAddressField()
+	
+	def __str__(self):
+		return str(self.id) + ". " + str(self.item) + ', ' + str(self.user.username)
+	
+class WatchEntry(models.Model):
+	item = models.ForeignKey(UniqueID, on_delete=models.CASCADE)
+	date = models.DateTimeField()
+	region = models.GenericIPAddressField()
+	
+	def __str__(self):
+		return str(self.id) + ". " + str(self.item) + ', ' + str(self.date)

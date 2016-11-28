@@ -1,0 +1,31 @@
+<hr>
+<form action="{% url 'shopapp:category' 'monitor' '1' %}" method="post">
+	{% csrf_token %}
+	<label for="min_price">Minimal price:</label>
+	<input type="text" id="min_price" name="min_price" value="{{ filter.min_price }}"/>
+	
+	<label for="max_price">Maximal price:</label>
+	<input type="text" id="max_price" name="max_price" value="{{ filter.max_price }}"/>
+	
+	<label for="brand_name">Brand:</label>
+	<input type="text" id="brand_name" name="brand_name" value="{{ filter.brand_name }}"/>
+	
+	<label for="min_hdmi">Min HDMI:</label>
+	<input type="text" id="min_hdmi" name="min_hdmi" value="{{ filter.min_hdmi }}"/>
+	
+	<label for="min_vga">Min VGA:</label>
+	<input type="text" id="min_vga" name="min_vga" value="{{ filter.min_vga }}"/>
+	
+	<br/>
+	<input type="submit" name="action_button" value="Filter" />
+	
+	<br/>
+	{% if can_go_prev %}
+	<input type="submit" name="action_button" value="< Prev" />
+	{% endif %}
+	{% if can_go_next %}
+	<input type="submit" name="action_button" value="Next >" />
+	{% endif %}
+	
+</form>
+<hr>

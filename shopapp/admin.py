@@ -10,4 +10,5 @@ admin.site.register(TV)
 admin.site.register(Monitor)
 admin.site.register(Projector)
 admin.site.register(UserItem)
+admin.site.register(WatchEntry)
 
