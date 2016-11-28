@@ -1,0 +1,21 @@
+{% extends "shopapp/base_generic.html" %}
+
+{% block content %} 
+
+<b>Brand:</b> {{obj.brand.name}} <br/>
+<b>Model:</b> {{obj.model}} <br/>
+<b>Price:</b> {{obj.price}} <br/>
+<b>Smart:</b> {{obj.is_smart}} <br/>
+<b>Diagonal:</b> {{obj.diagonal}} <br/>
+
+{% if user.is_authenticated %}
+<form action="{% url 'shopapp:buy_item' obj.unique_id.id %}" method="post">
+{% csrf_token %}
+	<input type="submit" value="Buy"/>
+	
+</form>
+{% else %}
+<b>Login to buy!</b>
+{% endif %} 
+
+{% endblock %}

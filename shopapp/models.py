@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -75,3 +76,10 @@ class Projector(ShopItem):
 		item = cls(brand=brand, model=model, unique_id=unique_id, price=price, brightness=brightness, hdmi_num=hdmi_num, vga_num=vga_num)
 		item.save()
 		return item
+		
+class UserItem(models.Model):
+	item = models.ForeignKey(UniqueID, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	price = models.FloatField()
+	date = models.DateTimeField()
+	region = models.GenericIPAddressField()

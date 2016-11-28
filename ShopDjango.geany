@@ -23,14 +23,10 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=6
-FILE_NAME_0=0;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Furls.py;0;4
-FILE_NAME_1=129;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Ftemplates%2Fshopapp%2Fcategories.html;0;4
-FILE_NAME_2=0;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Fviews.py;0;4
-FILE_NAME_3=749;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fdjangoshop%2Furls.py;0;4
-FILE_NAME_4=935;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Ftemplates%2Fshopapp%2Fbase_generic.html;0;4
-FILE_NAME_5=3325;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fdjangoshop%2Fsettings.py;0;4
-FILE_NAME_6=123;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Ftemplates%2Fshopapp%2Fcategory.html;0;4
+current_page=2
+FILE_NAME_0=80;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Ftemplates%2Fshopapp%2Fitem_bought.html;0;4
+FILE_NAME_1=0;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Ftemplates%2Fshopapp%2Fmonitor_view.html;0;4
+FILE_NAME_2=2040;Python;0;EUTF-8;1;1;0;%2Fhome%2Fvladfedchenko%2FDocuments%2FGitHub%2FShopDjango%2Fshopapp%2Fviews.py;0;4
 
 [VTE]
 last_dir=/home/vladfedchenko
