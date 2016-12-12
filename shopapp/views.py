@@ -5,6 +5,8 @@ from .models import *
 from datetime import datetime
 from django.urls import reverse
 import sys
+import redis
+import ast
 
 categories = {'tv' : ('TVs', TV),
 				'monitor' : ('Monitors', Monitor),
@@ -13,13 +15,70 @@ categories = {'tv' : ('TVs', TV),
 rows = 4
 cols = 4
 
+def write_user_params(username, post_dict, path):
+	r = redis.StrictRedis(host='localhost', port=6379)
+	#r.set('vlad', 'Test')
+	r.set(username + ':path', path)
+	r.set(username + ':post_dict', str(post_dict))
+	r.bgsave()
+	del r
+	
+def resolve_post_dictionary(request):
+	if (request.method == 'POST'):
+		return request.POST.dict()
+	else:
+		result = {}
+		if (request.user.is_authenticated()):
+			r = redis.StrictRedis(host='localhost', port=6379)
+			
+			need_to_restore = r.get(request.user.get_username() + ':need_to_restore')
+			if (None != need_to_restore):
+				r.delete(request.user.get_username() + ':need_to_restore')
+				dict_str = r.get(request.user.get_username() + ':post_dict')
+			
+				if (None != dict_str):
+					result = ast.literal_eval(dict_str.decode('ascii'))	
+			
+			del r
+		return result
+			
+
+def index_force(request):
+	if (request.user.is_authenticated()):
+		r = redis.StrictRedis(host='localhost', port=6379)
+		r.delete(request.user.get_username() + ':path')
+		r.delete(request.user.get_username() + ':post_dict')
+		del r
+	return HttpResponseRedirect(reverse('shopapp:index'))
+
 def index(request):
+	if (request.user.is_authenticated()):
+		
+		r = redis.StrictRedis(host='localhost', port=6379)
+		path = r.get(request.user.get_username() + ':path')
+		if (None != path):
+			r.set(request.user.get_username() + ':need_to_restore', '1')
+		del r
+		if (None != path):
+			return HttpResponseRedirect(path)
+		
 	return render(request, 'shopapp/index.html')
 	
 def category(request, category_val, page):
+	
+	post_dict = resolve_post_dictionary(request)
+	
+	if (request.user.is_authenticated()):
+		write_user_params(request.user.get_username(), post_dict, request.path)
+		
+	
+	#return HttpResponse(str(request.POST.dict()))
+	
+	#return HttpResponse(request.path)
+	
 	count = rows * cols
 	
-	if request.POST.get('action_button'):
+	if post_dict.get('action_button'):
 		act = request.POST.get('action_button')
 		if (act == '< Prev'):
 			page = int(page) - 1
@@ -34,7 +93,7 @@ def category(request, category_val, page):
 	finish = page * count
 	cls = categories[category_val][1]
 	
-	obj_list, filt = filter_objects(request, cls.objects)
+	obj_list, filt = filter_objects(post_dict, cls.objects)
 	
 	obj_count = obj_list.count()
 	
@@ -57,41 +116,41 @@ def category(request, category_val, page):
 	#tv = cls.objects.get(id=1)
 	return render(request, 'shopapp/category.html', context)
 	
-def filter_objects(request, obj_set):
+def filter_objects(post_dict, obj_set):
 	
 	filt = {}
-	if request.POST.get('min_price'):
-		tmp = float(request.POST.get('min_price'))
+	if post_dict.get('min_price'):
+		tmp = float(post_dict.get('min_price'))
 		obj_set = obj_set.filter(price__gte=tmp)
 		filt['min_price'] = tmp
 	
-	if request.POST.get('max_price'):
-		tmp = float(request.POST.get('max_price'))
+	if post_dict.get('max_price'):
+		tmp = float(post_dict.get('max_price'))
 		obj_set = obj_set.filter(price__lte=tmp)
 		filt['max_price'] = tmp
 		
-	if request.POST.get('brand_name'):
-		tmp = request.POST.get('brand_name')
+	if post_dict.get('brand_name'):
+		tmp = post_dict.get('brand_name')
 		obj_set = obj_set.filter(brand__name=tmp)
 		filt['brand_name'] = tmp
 		
-	if request.POST.get('is_smart'):
-		tmp = bool(request.POST.get('is_smart'))
+	if post_dict.get('is_smart'):
+		tmp = bool(post_dict.get('is_smart'))
 		obj_set = obj_set.filter(is_smart=tmp)
 		filt['is_checked'] = True
 		
-	if request.POST.get('min_brightness'):
-		tmp = int(request.POST.get('min_brightness'))
+	if post_dict.get('min_brightness'):
+		tmp = int(rpost_dict.get('min_brightness'))
 		obj_set = obj_set.filter(brightness__gte=tmp)
 		filt['min_brightness'] = tmp
 		
-	if request.POST.get('min_hdmi'):
-		tmp = int(request.POST.get('min_hdmi'))
+	if post_dict.get('min_hdmi'):
+		tmp = int(post_dict.get('min_hdmi'))
 		obj_set = obj_set.filter(hdmi_num__gte=tmp)
 		filt['min_hdmi'] = tmp
 		
-	if request.POST.get('min_vga'):
-		tmp = int(request.POST.get('min_vga'))
+	if post_dict.get('min_vga'):
+		tmp = int(post_dict.get('min_vga'))
 		obj_set = obj_set.filter(vga_num__gte=tmp)
 		filt['min_vga'] = tmp
 		
