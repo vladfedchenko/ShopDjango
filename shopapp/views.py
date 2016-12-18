@@ -4,6 +4,7 @@ from django.template import loader
 from .models import *
 from datetime import datetime
 from django.urls import reverse
+from pymongo import MongoClient
 import sys
 import redis
 import ast
@@ -70,11 +71,6 @@ def category(request, category_val, page):
 	
 	if (request.user.is_authenticated()):
 		write_user_params(request.user.get_username(), post_dict, request.path)
-		
-	
-	#return HttpResponse(str(request.POST.dict()))
-	
-	#return HttpResponse(request.path)
 	
 	count = rows * cols
 	
@@ -169,8 +165,46 @@ def categories_list():
 	return template.render(context)
 	
 def item_view(request, category_val, obj_id):
+	
+	context = {}
+	
 	cls = categories[category_val][1]
 	obj = get_object_or_404(cls, pk=obj_id)
+	
+	context['obj'] = obj
+	
+	client = MongoClient()
+	
+	comment_item = client['shop'].comments.find_one({u'object_uid' : str(obj.unique_id.id)})
+	#return HttpResponse(str(comment_item))
+	
+	if (not (comment_item is None)):
+		
+		context['aver_mark'] = comment_item[u'aver_mark']
+		context['comments'] = comment_item[u'comments_marks']
+		
+		comment_entry_l = [x for x in comment_item[u'comments_marks'] if x[u'user_id'] == request.user.id]
+		
+		if (len(comment_entry_l) != 0):
+			entry = comment_entry_l[0]
+			context['mark' + str(entry[u'mark'])] = True
+			context['comment'] = entry[u'comment']
+			
+			#return HttpResponse(str(context))
+			
+		else:
+			context['mark5'] = True
+			context['comment'] = ''
+			#return HttpResponse(str(context))
+			
+	else:
+		context['mark5'] = True
+		context['comment'] = ''
+		#return HttpResponse(str(context))
+	
+	del client
+		
+	#return HttpResponse(str(context))	
 	
 	we = WatchEntry()
 	we.item = obj.unique_id
@@ -178,7 +212,7 @@ def item_view(request, category_val, obj_id):
 	we.region = get_client_ip(request)
 	we.save()
 	
-	context = {'obj' : obj}
+	
 	if (category_val == 'tv'):
 		return render(request, 'shopapp/tv_view.html', context)
 	elif (category_val == 'monitor'):
@@ -219,5 +253,61 @@ def get_client_ip(request):
 def get_filter(context, cat_name):
 	template = loader.get_template('shopapp/filters/' + cat_name + '_filter.html')
 	return template.render(context)
+
+def get_new_comment(obj_uid):
+	comment = {}
+	comment[u'object_uid'] = obj_uid
+	comment[u'aver_mark'] = 0.0
+	comment[u'comment_count'] = 0
+	comment[u'comments_marks'] = []
 	
+	return comment
 	
+
+def leave_comment(request, obj_uid):
+	client = MongoClient()
+	comment_item_tmp = client['shop'].comments.find_one_and_delete({u'object_uid' : obj_uid})
+	
+	#return HttpResponse(str(comment_item_tmp))
+	
+	if (comment_item_tmp is None):
+		comment_item = get_new_comment(obj_uid)
+	else:
+		comment_item = comment_item_tmp
+		
+	comment_entry_l = [x for x in comment_item[u'comments_marks'] if x[u'user_id'] == request.user.id]
+	if (len(comment_entry_l) == 0):
+		entry = {}
+		entry[u'user_id'] = request.user.id
+		entry[u'username'] = request.user.username
+		entry[u'comment'] = request.POST['comment']
+		mark = int(request.POST['mark'])
+		entry[u'mark'] = mark
+		
+		count = comment_item[u'comment_count']
+		mark_sum = comment_item[u'aver_mark'] * count
+		
+		new_mark = (mark_sum + mark) / (count + 1)
+		comment_item[u'comment_count'] = count + 1
+		comment_item[u'aver_mark'] = new_mark
+		comment_item[u'comments_marks'].append(entry)
+		
+	else:
+		entry = comment_entry_l[0]
+		entry[u'comment'] = request.POST['comment']
+		prev_mark = entry[u'mark']
+		
+		mark = int(request.POST['mark'])
+		entry[u'mark'] = mark
+		
+		count = comment_item[u'comment_count']
+		mark_sum = comment_item[u'aver_mark'] * count
+		
+		new_mark = (mark_sum - prev_mark + mark) / count
+		comment_item[u'aver_mark'] = new_mark
+		
+	client['shop'].comments.insert_one(comment_item)
+	
+	del client
+	
+	return HttpResponseRedirect(reverse('shopapp:index'))

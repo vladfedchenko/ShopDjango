@@ -1,0 +1,55 @@
+{% extends "shopapp/base_generic.html" %}
+
+{% block content %} 
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-2">
+		{% block description %} 
+
+
+
+		{% endblock %}
+		</div>
+		<div class="col-sm-8">
+			{% if user.is_authenticated %}
+			<form action="{% url 'shopapp:leave_comment' obj.unique_id.id %}" method="post" id="comment_form">
+				{% csrf_token %}
+				<fieldset>
+					<legend>Mark</legend>
+					<input type="radio" name="mark" value="1" {% if mark1 %} checked {% endif %} />1
+					<input type="radio" name="mark" value="2" {% if mark2 %} checked {% endif %}/>2
+					<input type="radio" name="mark" value="3" {% if mark3 %} checked {% endif %}/>3
+					<input type="radio" name="mark" value="4" {% if mark4 %} checked {% endif %}/>4
+					<input type="radio" name="mark" value="5" {% if mark5 %} checked {% endif %}/>5
+				</fieldset>
+				
+				<fieldset>
+					<legend>Your comment</legend>
+					<textarea name="comment" rows="4" cols="50" form="comment_form">{{ comment }}</textarea>
+				</fieldset>
+				
+				<input type="submit" value="Submit">
+				
+			</form>
+			{% else %}
+			<b>Login to leave comments!</b>
+			{% endif %} 
+			
+			<hr/>
+			<br/>
+			<b>Average mark: </b> {{ aver_mark }}<br/>
+			<hr/>
+			{% for com in comments %}
+				<b>{{ com.username }}</b>: {{ com.mark }}<br/>
+				{{ com.comment }}<br/>
+				<hr/>
+			{% endfor %}
+			
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}
